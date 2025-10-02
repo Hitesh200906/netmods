@@ -1,0 +1,1765 @@
+/* =========================================================================
+   styles.css for NetMods
+   - Complete stylesheet including header, hero, cards, campaigns,
+     Whop stores, admin editor, password modal, auth forms, chat, profile,
+     promotion form and responsive rules.
+   - Organized, de-duplicated and extended with a polished profile page.
+   ========================================================================= */
+
+/* =========================
+   0. CSS Variables & Reset
+   ========================= */
+:root{
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --accent-500: #006df0;
+  --accent-600: #0056d6;
+  --accent-700: #003fa8;
+  --accent-200: #dbe9ff;
+  --success: #16a34a;
+  --danger: #ef4444;
+  --card-shadow: 0 6px 22px rgba(12,22,36,0.06);
+  --elev-shadow: 0 10px 30px rgba(12,22,36,0.08);
+  --glass: rgba(255,255,255,0.6);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+/* Reset & base */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  font-family: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg, video { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* container */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* helpers */
+.hidden { display: none !important; }
+.center { text-align: center; }
+.flex { display: flex; }
+.flex-column { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-8 { gap: 8px; }
+.gap-12 { gap: 12px; }
+.mt-8 { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mt-20 { margin-top: 20px; }
+.mb-8 { margin-bottom: 8px; }
+.mb-12 { margin-bottom: 12px; }
+.p-8 { padding: 8px; }
+
+/* focus accessibility */
+:focus { outline: 3px solid rgba(0,109,240,0.12); outline-offset: 3px; }
+
+/* =========================
+   1. Header
+   ========================= */
+header {
+  background: linear-gradient(90deg, rgba(0,20,40,0.98), rgba(3,37,65,0.98));
+  color: var(--surface);
+  padding: 14px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.left-nav, .right-nav { display:flex; align-items:center; gap:12px; }
+.logo {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #e6f0ff;
+  letter-spacing: 0.4px;
+}
+.logo small { color: #cfe3ff; font-weight: 500; margin-left: 6px; font-size: 0.86rem; }
+
+/* header buttons */
+.small-btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  transition: transform .18s ease, background .18s ease, color .18s ease;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  background: transparent;
+  color: var(--surface);
+}
+.btn-primary {
+  background: linear-gradient(180deg, var(--accent-500), var(--accent-600));
+  color: var(--surface);
+  box-shadow: 0 8px 24px rgba(2,94,218,0.12);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-weight: 700;
+}
+.btn-primary:hover { transform: translateY(-2px); filter: brightness(1.03); }
+.btn-outline {
+  background: transparent;
+  color: var(--surface);
+  border: 2px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+}
+.btn-outline:hover { background: rgba(255,255,255,0.06); color: var(--surface); transform: translateY(-2px); }
+.right-nav a { margin-left: 10px; }
+
+/* user menu (shown after login) */
+#userMenu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 8px;
+}
+.user-name {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: rgba(255,255,255,0.06);
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+/* header active */
+.header-active {
+  background: linear-gradient(90deg,var(--accent-600),var(--accent-700)) !important;
+  border-color: var(--accent-700) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 24px rgba(2,94,218,0.14);
+}
+
+/* =========================
+   2. Hero
+   ========================= */
+.hero {
+  background: linear-gradient(135deg,#041025 0%,#07203a 40%,#0b1320 100%);
+  color: #fff;
+  padding: 88px 20px;
+  position: relative;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+.hero .container { text-align: center; }
+.hero h1 {
+  font-size: 2.6rem;
+  line-height: 1.05;
+  margin-bottom: 10px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.4px;
+  text-shadow: 0 6px 20px rgba(0,0,0,0.45);
+}
+.hero p {
+  font-size: 1.05rem;
+  color: rgba(235,245,255,0.9);
+  max-width: 760px;
+  margin: 0 auto;
+}
+.hero .hero-actions { margin-top: 20px; }
+
+/* decorative shapes */
+.hero .shape { position: absolute; border-radius: 50%; opacity: 0.06; filter: blur(30px); }
+.hero .shape.s1 { width: 260px; height: 260px; background: #0074e6; right: -80px; top: -60px; transform: rotate(12deg); }
+.hero .shape.s2 { width: 360px; height: 360px; background: #00bcd4; left: -120px; bottom: -60px; }
+
+/* =========================
+   3. Sections & Titles
+   ========================= */
+section { padding: 56px 20px; }
+h2 {
+  text-align: center;
+  font-size: 1.9rem;
+  color: #061428;
+  margin-bottom: 18px;
+  position: relative;
+}
+h2::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 4px;
+  background: linear-gradient(90deg,var(--accent-500),var(--accent-600));
+  margin: 12px auto 0;
+  border-radius: 6px;
+}
+
+/* =========================
+   4. Cards Grid (general)
+   ========================= */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  align-items: start;
+}
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--card-shadow);
+  transition: transform .28s ease, box-shadow .28s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+  text-align: center;
+}
+.card:hover { transform: translateY(-8px); box-shadow: 0 12px 34px rgba(12,22,36,0.12); }
+.card img { width: 100%; height: 160px; object-fit: cover; border-radius: 10px; margin-bottom: 12px; }
+.card h3 { font-size: 1.12rem; margin-bottom: 8px; color: #07203a; }
+.card p { color: #444; font-size: .98rem; line-height: 1.4; }
+
+/* promo cards: button full width */
+.promo-option .promo-btn {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(180deg,var(--accent-500),var(--accent-600));
+  color: #fff;
+  font-weight: 700;
+}
+.promo-option .promo-btn:hover { transform: translateY(-2px); }
+
+/* selected promo visual */
+.promo-option.selected { box-shadow: 0 12px 30px rgba(0,86,214,0.08); transform: translateY(-6px); }
+
+/* =========================
+   5. Support Cards - image backgrounds & new PNGs
+   ========================= */
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 22px;
+  margin-top: 12px;
+}
+.support-card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 0;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.support-card .support-media {
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));
+  padding: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 160px;
+}
+.support-card .support-media img { width: auto; height: 100%; object-fit: contain; }
+.support-card .support-body {
+  padding: 16px;
+  text-align: center;
+}
+.support-card h3 { margin-bottom: 8px; color: #07203a; }
+.support-card p { color: var(--muted); font-size: .98rem; }
+
+/* specific PNG sources - prefer local filenames but fallback to neutral image if missing */
+.support-card.admin .support-media img { content: url("admin.png"); }
+.support-card.mod .support-media img { content: url("moderator.png"); }
+.support-card.packages .support-media img { content: url("packages.png"); }
+
+/* =========================
+   6. Campaign Tabs & content
+   ========================= */
+/* Tabs row */
+.tabs { display:flex; gap:10px; justify-content:center; margin-bottom:18px; }
+.tab-btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid #d8e6ff;
+  background: var(--surface);
+  cursor: pointer;
+  transition: transform .15s, background .15s;
+}
+.tab-btn:hover { transform: translateY(-2px); }
+.tab-btn.active { background: linear-gradient(180deg,var(--accent-500),var(--accent-600)); color: var(--surface); border-color: var(--accent-700); }
+
+/* campaign-card */
+.campaign-card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: var(--surface);
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 12px;
+}
+.campaign-card .thumb {
+  width: 150px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f7fbff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e6eefb;
+}
+.campaign-card .thumb img { width: 100%; height: 100%; object-fit: cover; }
+.campaign-card .meta { flex: 1; }
+.campaign-card h4 { font-size: 1.05rem; margin-bottom: 6px; color: #07203a; }
+.campaign-card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 8px; }
+.visit-btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: linear-gradient(180deg,var(--accent-500),var(--accent-600));
+  color: var(--surface);
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 700;
+}
+
+/* gallery */
+.campaign-gallery { margin-top: 12px; }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 8px; }
+.gallery-item { background: var(--surface); border-radius: 8px; overflow: hidden; border: 1px solid #e6eefb; padding: 6px; min-height: 120px; display:flex; align-items:center; justify-content:center; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+/* hide when empty */
+.campaign-gallery[aria-hidden="true"] { display: none; }
+
+/* =========================
+   7. Whop Stores
+   ========================= */
+#whopStoresList .store-card { display:flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.store-card .store-img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; }
+
+/* =========================
+   8. Auth (Login / Signup)
+   ========================= */
+.auth-section {
+  max-width: 520px;
+  margin: 60px auto;
+  background: var(--surface);
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: var(--elev-shadow);
+  animation: fadeInUp .7s ease both;
+}
+.auth-section h2 { font-size: 1.6rem; margin-bottom: 12px; color: #07203a; }
+.auth-section form { display: flex; flex-direction: column; gap: 12px; }
+.auth-section input[type="text"], .auth-section input[type="email"], .auth-section input[type="password"] {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #d2dbe6;
+  font-size: 1rem;
+}
+.auth-section input:focus { outline: none; border-color: var(--accent-600); box-shadow: 0 6px 18px rgba(3,102,214,0.08); }
+.auth-section p { margin-top: 8px; color: var(--muted); font-size: .95rem; }
+
+/* =========================
+   9. Chat (global)
+   ========================= */
+#chatSection { max-width: 760px; margin: 40px auto 80px; padding: 0 12px; }
+#chatBox {
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: var(--elev-shadow);
+  overflow: hidden;
+  border: 1px solid #e6eefb;
+  display: flex;
+  flex-direction: column;
+  height: 520px;
+}
+#chatMessages {
+  flex: 1 1 auto;
+  padding: 18px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: linear-gradient(180deg,#fbfdff,#f7fbff);
+}
+.message-bubble {
+  max-width: 78%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: .98rem;
+  line-height: 1.35;
+  box-shadow: 0 6px 18px rgba(3,40,80,0.06);
+  word-wrap: break-word;
+}
+.message-bubble.user { margin-left: auto; background: linear-gradient(180deg,var(--accent-500),var(--accent-600)); color: #fff; border-bottom-right-radius: 4px; }
+.message-bubble.admin { margin-right: auto; background: #f1f5fb; color: #07203a; border-bottom-left-radius: 4px; }
+.chat-inputs { display: flex; border-top: 1px solid #e6eefb; }
+#chatInput { flex: 1; padding: 14px 16px; border: none; background: transparent; font-size: 1rem; }
+#chatSend { background: var(--accent-600); color: #fff; padding: 12px 18px; border: none; font-weight: 700; cursor: pointer; }
+
+/* =========================
+   10. Admin Panel
+   ========================= */
+#adminSection {
+  max-width: 920px;
+  margin: 40px auto 80px;
+  background: var(--surface);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: var(--elev-shadow);
+}
+#adminSection h2 { margin-bottom: 10px; color: #07203a; }
+#adminSection h3 { margin-top: 8px; font-size: 1.05rem; color: #0b1221; }
+
+/* campaign form */
+#campaignForm label { display:block; font-weight:600; margin-top:10px; margin-bottom:6px; color:#0b1221; }
+#campaignForm input[type="text"], #campaignForm input[type="url"], #campaignForm select {
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #d8e6ff;
+  border-radius:8px;
+  background:#fff;
+  font-size:0.98rem;
+}
+#campaignForm input[type="file"] { margin-top:6px; }
+.preview-small { margin-top:8px; }
+#campaignImagePreview { max-width:100%; border-radius:8px; display:block; }
+#campaignImagePlaceholder { color:var(--accent-500); font-weight:700; opacity:0.85; }
+
+/* admin list */
+#adminCampaignList { margin-top:12px; display:flex; flex-direction:column; gap:10px; }
+.admin-item {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  background:#fbfdff;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #e6eefb;
+}
+.admin-item img { width:96px; height:64px; object-fit:cover; border-radius:6px; }
+.admin-item .info { flex:1; }
+.admin-item .actions { display:flex; gap:8px; }
+.admin-item .actions button { padding:8px 10px; font-size:0.9rem; }
+
+/* =========================
+   11. Modal (password)
+   ========================= */
+.modal { position: fixed; inset: 0; display:flex; align-items:center; justify-content:center; background: rgba(0,0,0,0.45); z-index: 20000; }
+.modal-content {
+  background: var(--surface);
+  padding: 18px;
+  border-radius: 10px;
+  width: 360px;
+  max-width: 92%;
+  box-shadow: 0 10px 40px rgba(2,6,23,0.12);
+  text-align: center;
+}
+.modal-content h3 { margin-bottom: 8px; font-size: 1.1rem; color: #07203a; }
+.modal-content p { color: var(--muted); font-size: 0.95rem; margin-bottom: 8px; }
+.modal-content input { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid #d8e6ff; margin-top: 8px; }
+.modal-actions { display:flex; gap:8px; justify-content:flex-end; margin-top:12px; }
+.pw-error { color: var(--danger); margin-top: 8px; display:none; }
+
+/* =========================
+   12. Footer
+   ========================= */
+footer { background: linear-gradient(90deg,#061428,#031225); color: #e6f0ff; padding: 20px 0; text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.03); }
+
+/* =========================
+   13. Scrollbar
+   ========================= */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); border-radius: 6px; }
+::-webkit-scrollbar-thumb { background: #c7d5e9; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #98b4e0; }
+
+/* =========================
+   14. Animations & helpers
+   ========================= */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-6px); } 100% { transform: translateY(0); } }
+.fade-in { animation: fadeInUp .7s ease both; }
+.float { animation: float 4s ease-in-out infinite; }
+
+/* =========================
+   15. Responsive
+   ========================= */
+@media (max-width: 1100px) { .hero h1 { font-size: 2.2rem; } }
+@media (max-width: 900px) {
+  .nav-bar { flex-direction: column; align-items: stretch; gap: 10px; padding: 6px 0; }
+  .left-nav { justify-content: space-between; width: 100%; }
+  .right-nav { margin-top: 10px; justify-content: flex-end; width: 100%; }
+  .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+  .campaign-card { flex-direction: column; align-items: stretch; }
+  .campaign-card .thumb { width: 100%; height: 180px; }
+}
+@media (max-width: 720px) {
+  .hero { padding: 72px 16px; }
+  .hero h1 { font-size: 2rem; }
+  .cards { gap: 18px; }
+  .auth-section { margin: 30px 12px; padding: 20px; }
+  #chatBox { height: 420px; }
+  .admin-item img { width: 84px; height: 60px; }
+}
+@media (max-width: 480px) {
+  .logo { font-size: 1.4rem; }
+  .small-btn { padding: 6px 8px; font-size: 0.85rem; }
+  .hero { padding: 48px 12px; }
+  .auth-section { margin: 22px 8px; padding: 16px; }
+  #chatBox { height: 360px; }
+  .card { padding: 12px; }
+  .campaign-card .thumb { height: 120px; }
+}
+
+/* =========================
+   16. Print-friendly
+   ========================= */
+@media print {
+  header, footer, .btn-primary, .btn-outline, .modal { display: none !important; }
+  body { background: #fff; color: #000; }
+  .card { box-shadow: none; border: 1px solid #eee; }
+}
+
+/* =========================
+   17. Developer helpers
+   ========================= */
+/* .debug-outline * { outline: 1px solid rgba(255,0,0,0.08); } */
+
+/* =========================================================================
+   Extras: Promotion form, modal, admin-forms, promotion modal rules
+   ========================================================================= */
+/* Hide promotion checkbox (if present) */
+#promotions input[type="checkbox"] { display: none; }
+
+/* Promotion form card */
+.promo-form-card {
+  background: var(--surface);
+  padding: 28px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--elev-shadow);
+  max-width: 720px;
+  margin: 0 auto;
+  animation: fadeInUp .7s ease both;
+}
+.promo-form-card h2 { font-size: 1.6rem; margin-bottom: 16px; color: #07203a; }
+.promo-form-card label { display:block; margin:8px 0 6px; font-weight:600; color:#0b1221; }
+.promo-form-card input[type="text"], .promo-form-card input[type="email"], .promo-form-card input[type="file"], .promo-form-card textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d2dbe6;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+.promo-form-card textarea { resize: vertical; min-height: 120px; }
+.form-actions { display:flex; gap:12px; margin-top:12px; }
+
+/* Promotion modal for alternate UI */
+#promotionFormModal { position: fixed; inset: 0; background: rgba(0,0,0,0.65); display:flex; align-items:center; justify-content:center; z-index:3000; }
+#promotionFormModal.hidden { display: none; }
+#promotionFormModal .modal-content {
+  background: var(--surface);
+  max-width: 720px;
+  width: 95%;
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  padding: 18px;
+  position: relative;
+}
+
+/* Admin forms list */
+.admin-forms-item {
+  background: #fbfdff;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e6eefb;
+  margin-bottom: 12px;
+  box-shadow: var(--card-shadow);
+}
+.admin-forms-item strong { color: #07203a; }
+
+/* =========================================================================
+   18. PROFILE: attractive, modern design
+   - Includes conditional chat visibility: .profile-has-packages toggles chat
+   - Profile wrapper, header, body, cards, packages, actions, upload
+   ========================================================================= */
+
+/* top-level profile section wrapper (use id="profileSection" in HTML) */
+#profileSection {
+  padding: 40px 20px;
+  background: transparent;
+}
+
+/* Profile container card */
+.profile-wrapper {
+  max-width: 980px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,252,255,0.95));
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(6,24,84,0.06);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* header area with gradient and avatar */
+.profile-header {
+  background: linear-gradient(135deg, var(--accent-500), var(--accent-700));
+  color: #fff;
+  padding: 28px 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+.profile-header .avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,0.14);
+  overflow: hidden;
+  background: rgba(255,255,255,0.08);
+  display: inline-block;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.profile-header .avatar img { width: 100%; height: 100%; object-fit: cover; display:block; }
+.profile-header h2 { margin-top: 10px; font-size: 1.4rem; font-weight: 800; letter-spacing: -0.3px; }
+.profile-header p { margin-top: 6px; color: rgba(255,255,255,0.92); font-weight: 500; }
+
+/* profile body split */
+.profile-body {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 20px;
+  padding: 22px;
+  align-items: start;
+}
+
+/* left column - main profile cards */
+.profile-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* right column - actions & packages */
+.profile-side {
+  display:flex;
+  flex-direction:column;
+  gap: 14px;
+}
+
+/* generic profile card */
+.profile-card {
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(11,29,60,0.04);
+}
+.profile-card h3 { font-size: 1.05rem; color: #07203a; margin-bottom: 8px; }
+.profile-card p { color: var(--muted); font-size: 0.98rem; margin-bottom: 8px; }
+
+/* profile details list */
+.profile-details dl { display: grid; grid-template-columns: 120px 1fr; gap: 8px 14px; align-items: center; }
+.profile-details dt { color: var(--muted); font-weight: 600; }
+.profile-details dd { margin: 0; color: #07203a; font-weight: 700; }
+
+/* profile edit fields */
+.input-inline {
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.input-inline input[type="text"], .input-inline input[type="email"] {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e6eefb;
+  font-size: 0.98rem;
+}
+
+/* upload button & file input styling */
+.upload-control {
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.upload-control input[type="file"] {
+  display:none;
+}
+.upload-btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--accent-700);
+  border: 1px solid #e6eefb;
+  font-weight: 700;
+  cursor: pointer;
+}
+.upload-btn:hover { transform: translateY(-2px); }
+
+/* packages list */
+.packages-list {
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.package-item {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px;
+  background: linear-gradient(180deg,#fff,#fbfdff);
+  border-radius: 8px;
+  border: 1px solid #e6eefb;
+}
+.package-item .title { font-weight: 700; color: #07203a; }
+.package-item .meta { color: var(--muted); font-size: 0.92rem; }
+
+/* purchase simulation button */
+.purchase-sim {
+  display:block;
+  padding: 10px 12px;
+  text-align:center;
+  background: linear-gradient(180deg,var(--accent-500),var(--accent-600));
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.purchase-sim:hover { transform: translateY(-2px); }
+
+/* profile actions area */
+.profile-actions { display:flex; gap:10px; flex-wrap:wrap; }
+.action-btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #e6eefb;
+  color: var(--accent-700);
+  font-weight: 700;
+  cursor: pointer;
+}
+.action-btn.secondary { background: transparent; color: var(--accent-700); }
+.action-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+/* change password area */
+.password-row { display:flex; gap:8px; align-items:center; }
+.password-row input { flex:1; padding:10px 12px; border-radius:8px; border:1px solid #e6eefb; }
+
+/* profile chat (hidden unless user has packages) */
+#profileChatBox {
+  display: none;
+}
+.profile-has-packages #profileChatBox {
+  display: block;
+  margin-top: 14px;
+}
+#profileChatMessages {
+  background: linear-gradient(180deg,#fbfdff,#f7fbff);
+  border: 1px solid #e6eefb;
+  height: 180px;
+  overflow-y: auto;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+#profileChatMessages .message-bubble {
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  max-width: 78%;
+  font-size: 0.95rem;
+}
+#profileChatMessages .user {
+  margin-left: auto;
+  background: linear-gradient(180deg,var(--accent-500),var(--accent-600));
+  color: #fff;
+}
+#profileChatMessages .admin {
+  margin-right: auto;
+  background: #eef6ff;
+  color: #07203a;
+}
+
+/* chat input area in profile */
+.profile-chat-inputs { display:flex; gap:8px; align-items:center; }
+.profile-chat-inputs input {
+  flex:1; padding:10px 12px; border-radius:8px; border:1px solid #e6eefb;
+}
+.profile-chat-inputs button {
+  padding:10px 12px; border-radius:8px; background: linear-gradient(180deg,var(--accent-500),var(--accent-600)); color:#fff; border:none; cursor:pointer;
+}
+
+/* empty state text */
+.empty-state {
+  text-align:center;
+  color: var(--muted);
+  padding: 20px;
+  border-radius: 8px;
+  background: linear-gradient(180deg,#fff,#fbfdff);
+  border: 1px dashed #e6eefb;
+}
+
+/* small helpers for profile */
+.kv { display:flex; gap:10px; align-items:center; }
+.kv dt { font-weight:700; color:#07203a; }
+.kv dd { margin:0; color:var(--muted); }
+
+/* responsive profile layout */
+@media (max-width: 920px) {
+  .profile-body { grid-template-columns: 1fr; padding: 18px; }
+  .profile-side { order: 2; }
+  .profile-header { padding: 22px 16px; }
+  .profile-header h2 { font-size: 1.2rem; }
+}
+
+/* =========================
+   19. Utilities & edge cases
+   - small adjustments for accessibility and small screens
+   ========================= */
+.small-muted { color: var(--muted); font-size: 0.9rem; }
+.centered-col { display:flex; flex-direction:column; align-items:center; gap:8px; }
+
+/* =========================
+   20. End of file
+   ========================= */
+
+/* =========================
+  /* =========================================================================
+   PROFILE PAGE STYLES (NetMods)
+   Black & White theme, avatar, banner upload, chat, account info
+   ========================================================================= */
+
+/* Profile Section Wrapper */
+#profileSection {
+  padding: 40px 20px;
+  background: #000;   /* black background */
+  color: #fff;        /* white text */
+}
+
+/* Profile Container */
+.profile-wrapper {
+  max-width: 980px;
+  margin: 0 auto;
+  background: #111; /* dark surface */
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+
+/* =======================
+   Header (Banner + Avatar)
+   ======================= */
+.profile-header {
+  background: #222;
+  color: #fff;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Banner Button */
+#uploadBannerBtn {
+  margin-bottom: 16px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #000;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+#uploadBannerBtn:hover {
+  background: #333;
+}
+
+/* Avatar (Profile Picture) */
+.profile-header .avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  overflow: hidden;
+  background: #000;
+  margin-bottom: 12px;
+}
+.profile-header .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Username (white, bigger) */
+.profile-header h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  margin-top: 8px;
+}
+
+/* Email below username */
+.profile-header p {
+  margin-top: 4px;
+  color: #bbb;
+  font-size: 0.95rem;
+}
+
+/* Upload Button (for profile pic) */
+.upload-btn {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+.upload-btn:hover {
+  background: #333;
+}
+#profileImageInput { display: none; }
+#profileBannerInput { display: none; }
+
+/* =======================
+   Profile Body Layout
+   ======================= */
+.profile-body {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  padding: 22px;
+  align-items: start;
+}
+.profile-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.profile-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Profile Cards */
+.profile-card {
+  background: #111;
+  border: 1px solid #333;
+  padding: 16px;
+  border-radius: 8px;
+}
+.profile-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #fff;
+}
+.profile-card p, 
+.profile-card span,
+.profile-card input {
+  color: #fff;
+}
+
+/* Account Info List */
+.profile-details dl {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 8px 14px;
+}
+.profile-details dt {
+  color: #bbb;
+  font-weight: 600;
+}
+.profile-details dd {
+  margin: 0;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* Save Button */
+.action-btn {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #000;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.action-btn:hover { background: #333; }
+
+/* Change Password Row */
+.password-row {
+  display: flex;
+  gap: 8px;
+}
+.password-row input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #000;
+  color: #fff;
+}
+
+/* =======================
+   Purchased Packages
+   ======================= */
+.packages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #111;
+  border: 1px solid #333;
+  padding: 10px;
+  border-radius: 8px;
+}
+.package-item {
+  padding: 10px;
+  border-radius: 6px;
+  background: #000;
+  border: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+}
+
+/* Purchase Button */
+.purchase-sim {
+  margin-top: 10px;
+  display: block;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  background: #000;
+  color: #fff;
+  border: 1px solid #444;
+  font-weight: 700;
+  cursor: pointer;
+}
+.purchase-sim:hover { background: #333; }
+
+/* =======================
+   Profile Chat
+   ======================= */
+#profileChatBox {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 12px;
+}
+#profileChatMessages {
+  height: 160px;
+  overflow-y: auto;
+  padding: 8px;
+  border-radius: 8px;
+  background: #000;
+  color: #fff;
+}
+#profileChatMessages .message {
+  margin-bottom: 8px;
+}
+#profileChatMessages .user {
+  background: #333;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+#profileChatMessages .admin {
+  background: #222;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #bbb;
+}
+.profile-chat-inputs {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.profile-chat-inputs input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #000;
+  color: #fff;
+}
+.profile-chat-inputs button {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #000;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.profile-chat-inputs button:hover { background: #333; }
+
+/* =======================
+   Responsive Adjustments
+   ======================= */
+@media (max-width: 900px) {
+  .profile-body {
+    grid-template-columns: 1fr;
+  }
+  .profile-side {
+    order: 2;
+  }
+  .profile-header h2 {
+    font-size: 1.4rem;
+  }
+}
+/* Profile header with banner */
+.profile-header {
+  background: linear-gradient(135deg, #111, #333);
+  color: black;
+  padding: 28px 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 2px solid #222;
+}
+
+/* Profile avatar */
+.avatar.small-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid rgba(255,255,255,0.3);
+  background: #222;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.avatar.small-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Upload controls (outside box) */
+.profile-upload-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 14px 0;
+}
+.profile-upload-controls input[type="file"] {
+  display: none;
+}
+.upload-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-weight: 600;
+}
+.upload-btn:hover {
+  background: #f4f4f4;
+}
+/* =============================
+   PROFILE PAGE (Black & White)
+   ============================= */
+
+/* =====================================================
+   PROFILE PAGE STYLES (NetMods)
+   Modern light theme with animations & hover effects
+   ===================================================== */
+
+/* Section Wrapper */
+#profileSection {
+  padding: 40px 20px;
+  background: #f9fafc;      /* light background */
+  color: #222;
+  font-family: "Inter", sans-serif;
+}
+
+/* Profile Container */
+.profile-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #e3e6eb;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  animation: fadeInUp 0.6s ease;
+  transition: box-shadow 0.3s ease;
+}
+.profile-wrapper:hover {
+  box-shadow: 0 10px 26px rgba(0,0,0,0.12);
+}
+
+/* ==============================
+   Header (Banner + Avatar)
+   ============================== */
+.profile-header {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  position: relative;
+}
+
+/* Avatar */
+.profile-header .avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  overflow: hidden;
+  background: #eee;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+.profile-header .avatar:hover {
+  transform: scale(1.05);
+}
+.profile-header .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Username & Email */
+.profile-header h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a237e;
+  margin-top: 8px;
+}
+.profile-header p {
+  margin-top: 4px;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* Upload Controls */
+.profile-upload-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 16px 0;
+}
+.profile-upload-controls input[type="file"] { display: none; }
+.upload-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #90caf9;
+  background: #e3f2fd;
+  color: #0d47a1;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.upload-btn:hover {
+  background: #bbdefb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* ==============================
+   Profile Body Layout
+   ============================== */
+.profile-body {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  padding: 22px;
+  align-items: start;
+}
+.profile-main { display: flex; flex-direction: column; gap: 16px; }
+.profile-side { display: flex; flex-direction: column; gap: 16px; }
+
+/* Profile Cards */
+.profile-card {
+  background: #fff;
+  border: 1px solid #e3e6eb;
+  padding: 16px;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.profile-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.profile-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #0d47a1;
+}
+.profile-card p, .profile-card span, .profile-card input {
+  color: #222;
+}
+
+/* Account Info */
+.profile-details dl {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 8px 14px;
+}
+.profile-details dt {
+  color: #666;
+  font-weight: 600;
+}
+.profile-details dd {
+  margin: 0;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Buttons */
+.action-btn, .purchase-sim {
+  margin-top: 10px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: #2196f3;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.action-btn:hover, .purchase-sim:hover {
+  background: #1976d2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.action-btn:active, .purchase-sim:active {
+  transform: scale(0.96);
+}
+
+/* Change Password */
+.password-row {
+  display: flex;
+  gap: 8px;
+}
+.password-row input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #000;
+  transition: border 0.3s ease;
+}
+.password-row input:focus {
+  border-color: #2196f3;
+  outline: none;
+}
+
+/* Packages */
+.packages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.package-item {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #e3e6eb;
+  background: #f9f9f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.package-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.package-item .title { font-weight: 600; color: #0d47a1; }
+.package-item .meta { color: #555; font-size: 0.9rem; }
+
+/* Chat Box */
+#profileChatBox {
+  border: 1px solid #e3e6eb;
+  border-radius: 10px;
+  padding: 12px;
+  background: #fff;
+}
+#profileChatMessages {
+  height: 160px;
+  overflow-y: auto;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  color: #000;
+}
+#profileChatMessages .message {
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  max-width: 80%;
+  animation: fadeIn 0.4s ease;
+}
+#profileChatMessages .user {
+  background: #e3f2fd;
+  margin-left: auto;
+}
+#profileChatMessages .admin {
+  background: #f5f5f5;
+  margin-right: auto;
+  color: #333;
+}
+
+/* Chat Inputs */
+.profile-chat-inputs {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.profile-chat-inputs input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: #000;
+  transition: border 0.3s ease;
+}
+.profile-chat-inputs input:focus {
+  border-color: #2196f3;
+  outline: none;
+}
+.profile-chat-inputs button {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: none;
+  background: #2196f3;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.profile-chat-inputs button:hover {
+  background: #1976d2;
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .profile-body { grid-template-columns: 1fr; }
+  .profile-side { order: 2; }
+  .profile-header h2 { font-size: 1.4rem; }
+}
+/* ==============================
+   Profile Section Wrapper
+   ============================== */
+#profileSection {
+  padding: 40px 20px;
+  background: #f9fafc;   /* light background */
+  color: #222;
+  font-family: "Inter", sans-serif;
+}
+
+/* Profile Container */
+.profile-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #e3e6eb;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  animation: fadeInUp 0.6s ease;
+}
+
+/* ==============================
+   Header (Banner + Avatar)
+   ============================== */
+.profile-header {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb); /* fallback */
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Avatar */
+.profile-header .avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  overflow: hidden;
+  background: #eee;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+.profile-header .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Username */
+.profile-header h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 8px;
+  text-decoration: none;    /* remove underline */
+  border-bottom: none;      /* ensure no underline */
+  transition: color 0.3s ease;
+}
+
+/* Adaptive username color (class toggled via JS) */
+.profile-header h2.light-text { color: #fff; }
+.profile-header h2.dark-text { color: #111; }
+
+/* ==============================
+   Upload Controls
+   ============================== */
+.profile-upload-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 16px 0;
+}
+.profile-upload-controls input[type="file"] { display: none; }
+.upload-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #90caf9;
+  background: #e3f2fd;
+  color: #0d47a1;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.upload-btn:hover {
+  background: #bbdefb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* ==============================
+   Profile Body
+   ============================== */
+.profile-body {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  padding: 22px;
+  align-items: start;
+}
+.profile-main { display: flex; flex-direction: column; gap: 16px; }
+.profile-side { display: flex; flex-direction: column; gap: 16px; }
+
+/* Profile Card */
+.profile-card {
+  background: #fff;
+  border: 1px solid #e3e6eb;
+  padding: 16px;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.profile-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.profile-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #0d47a1;
+}
+
+/* Account Info (email now shown here only) */
+.profile-details dl {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 8px 14px;
+}
+.profile-details dt { color: #666; font-weight: 600; }
+.profile-details dd { margin: 0; color: #222; font-weight: 500; }
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* ==============================
+   Profile Section Wrapper
+   ============================== */
+#profileSection {
+  padding: 40px 20px;
+  background: #f9fafc;   /* light background */
+  color: #222;
+  font-family: "Inter", sans-serif;
+}
+
+/* Profile Container */
+.profile-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #e3e6eb;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  animation: fadeInUp 0.6s ease;
+}
+
+/* ==============================
+   Header (Banner + Avatar)
+   ============================== */
+.profile-header {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb); /* fallback */
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Avatar */
+.profile-header .avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  overflow: hidden;
+  background: #eee;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+.profile-header .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Username */
+.profile-header h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 8px;
+  text-decoration: none;    /* remove underline */
+  border-bottom: none;      /* ensure no underline */
+  transition: color 0.3s ease;
+}
+
+/* Adaptive username color (class toggled via JS) */
+.profile-header h2.light-text { color: #fff; }
+.profile-header h2.dark-text { color: #111; }
+
+/* ==============================
+   Upload Controls
+   ============================== */
+.profile-upload-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 16px 0;
+}
+.profile-upload-controls input[type="file"] { display: none; }
+.upload-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #90caf9;
+  background: #e3f2fd;
+  color: #0d47a1;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.upload-btn:hover {
+  background: #bbdefb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* ==============================
+   Profile Body
+   ============================== */
+.profile-body {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  padding: 22px;
+  align-items: start;
+}
+.profile-main { display: flex; flex-direction: column; gap: 16px; }
+.profile-side { display: flex; flex-direction: column; gap: 16px; }
+
+/* Profile Card */
+.profile-card {
+  background: #fff;
+  border: 1px solid #e3e6eb;
+  padding: 16px;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.profile-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.profile-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #0d47a1;
+}
+
+/* Account Info (email now shown here only) */
+.profile-details dl {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 8px 14px;
+}
+.profile-details dt { color: #666; font-weight: 600; }
+.profile-details dd { margin: 0; color: #222; font-weight: 500; }
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

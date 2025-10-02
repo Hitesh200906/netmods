@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NetMods - Admin & Promotion Support</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="container nav-bar">
+      <div class="left-nav">
+        <div class="logo">NetMods</div>
+        <a href="#" id="homeBtn" class="small-btn btn-outline">Home</a>
+        <a href="#" id="profileBtn" class="small-btn btn-outline">Profile</a>
+      </div>
+      <div class="right-nav">
+        <a href="#" id="chatBtn" class="small-btn btn-outline">Chat With Us</a>
+        <!-- user menu -->
+        <div id="userMenu" class="hidden">
+          <span id="userName" class="user-name small-text"></span>
+          <button id="logoutBtn" class="small-btn btn-outline">Logout</button>
+        </div>
+        <a href="#" id="loginBtn" class="small-btn btn-outline">Login</a>
+        <a href="#" id="signupBtn" class="small-btn btn-primary">Sign Up</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HOME PAGE ================= -->
+  <main id="homePage">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <h1>Grow Your Store with NetMods</h1>
+        <p>Admin & Moderator support, promotion packages and Whop store campaigns — all in one place.</p>
+        <div class="hero-actions">
+          <a href="#promotions" class="btn-primary">Get Started</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMOTIONS -->
+    <section id="promotions" class="container">
+      <h2>Choose Promotion</h2>
+      <div class="cards">
+        <div class="card promo-option" data-promo="Clipping">
+          <img src="clipping.png" alt="Clipping">
+          <button type="button" class="btn-primary promo-btn">Clipping</button>
+        </div>
+        <div class="card promo-option" data-promo="UGC">
+          <img src="ugc.png" alt="UGC">
+          <button type="button" class="btn-primary promo-btn">UGC</button>
+        </div>
+        <div class="card promo-option" data-promo="Logo">
+          <img src="logo.png" alt="Logo Promotion">
+          <button type="button" class="btn-primary promo-btn">Logo Promotion</button>
+        </div>
+        <div class="card promo-option" data-promo="Music">
+          <img src="music.png" alt="Music Promotion">
+          <button type="button" class="btn-primary promo-btn">Music Promotion</button>
+        </div>
+        <div class="card promo-option" data-promo="Product">
+          <img src="product.png" alt="Product Promotion">
+          <button type="button" class="btn-primary promo-btn">Product Promotion</button>
+        </div>
+        <div class="card promo-option" data-promo="Podcast">
+          <img src="podcast.png" alt="Podcast Promotion">
+          <button type="button" class="btn-primary promo-btn">Podcast Promotion</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUPPORT -->
+    <section id="support" class="container">
+      <h2>Support Options</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="Admin.png" alt="Admin Support">
+          <h3>Admin Support</h3>
+          <p>Order management, reporting and analytics to scale operations.</p>
+        </div>
+        <div class="card">
+          <img src="moderator.png" alt="Moderator Support">
+          <h3>Moderator Support</h3>
+          <p>Community moderation, chat handling and dispute resolution.</p>
+        </div>
+        <div class="card">
+          <img src="packages.png" alt="Other Packages">
+          <h3>Other Packages</h3>
+          <p>Custom packages tailored for unique needs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAMPAIGNS -->
+    <section id="campaigns" class="container">
+      <h2>Campaign</h2>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="active">Active Campaigns</button>
+        <button class="tab-btn" data-tab="ended">Ended Campaigns</button>
+      </div>
+      <div id="campaignsContent"></div>
+      <div class="campaign-gallery" id="campaignGallery" aria-hidden="true">
+        <div class="gallery-grid">
+          <div class="gallery-item"><img id="galleryImg1" src="" alt="Campaign image 1"></div>
+          <div class="gallery-item"><img id="galleryImg2" src="" alt="Campaign image 2"></div>
+          <div class="gallery-item"><img id="galleryImg3" src="" alt="Campaign image 3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHOP STORES -->
+    <section id="stores" class="container">
+      <h2>Whop Stores</h2>
+      <div class="cards" id="whopStoresList"></div>
+    </section>
+  </main>
+
+  <!-- ================= PROMOTION FORM ================= -->
+  <section id="promotionFormSection" class="hidden">
+    <div class="container">
+      <div class="promo-form-card">
+        <button id="promoBack" class="small-btn btn-outline">← Back</button>
+        <h2 id="promotionFormTitle">Promotion Form</h2>
+        <form id="promotionForm" enctype="multipart/form-data">
+          <label for="promoName">1. Full Name</label>
+          <input type="text" id="promoName" name="name" required>
+          <label for="promoEmail">2. Email</label>
+          <input type="email" id="promoEmail" name="email" required>
+          <label for="promoBrand">3. Brand / Product</label>
+          <input type="text" id="promoBrand" name="brand" required>
+          <label for="promoBudget">4. Budget (Approx.)</label>
+          <input type="text" id="promoBudget" name="budget" required>
+          <label for="promoInfo">5. Additional Information</label>
+          <textarea id="promoInfo" name="info"></textarea>
+          <label for="promoPhoto">Upload Photo (optional)</label>
+          <input type="file" id="promoPhoto" name="photo" accept="image/*">
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">Submit Request</button>
+            <button type="button" id="promoCancel" class="btn-outline">Cancel</button>
+          </div>
+        </form>
+        <div id="promoThanks" class="hidden">
+          <h3>Thank you! ✅</h3>
+          <p>Your request has been received. We'll contact you soon on the email provided.</p>
+          <button id="promoDone" class="btn-primary">Done</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LOGIN ================= -->
+  <section id="loginSection" class="auth-section hidden">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Email" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+      <button type="submit" class="btn-primary">Login</button>
+    </form>
+    <p>Don't have an account? <a href="#" id="goSignup">Sign Up</a></p>
+  </section>
+
+  <!-- ================= SIGNUP ================= -->
+  <section id="signupSection" class="auth-section hidden">
+    <h2>Sign Up</h2>
+    <form id="signupForm">
+      <input type="text" id="signupName" placeholder="Full Name" required>
+      <input type="email" id="signupEmail" placeholder="Email" required>
+      <input type="password" id="signupPassword" placeholder="Password" required>
+      <input type="password" id="signupConfirm" placeholder="Confirm Password" required>
+      <button type="submit" class="btn-primary">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="#" id="goLogin">Login</a></p>
+  </section>
+
+  <!-- ================= CHAT ================= -->
+  <section id="chatSection" class="auth-section hidden">
+    <h2>Chat With Us</h2>
+    <div id="chatBox">
+      <div id="chatMessages"></div>
+      <div class="chat-inputs">
+        <input type="text" id="chatInput" placeholder="Type your message...">
+        <button id="chatSend" class="btn-primary">Send</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ADMIN PANEL ================= -->
+  <section id="adminSection" class="auth-section hidden">
+    <h2>Admin Control Panel</h2>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="admin-campaigns">Campaigns</button>
+      <button class="tab-btn" data-tab="admin-forms">Promotion Forms</button>
+    </div>
+    <div id="admin-campaigns" class="admin-tab">
+      <h3>Manage Campaigns</h3>
+      <form id="campaignForm">
+        <input type="hidden" id="editingId" value="">
+        <label>Whop Store Name</label>
+        <input type="text" id="campaignName" required>
+        <label>Visit Store URL</label>
+        <input type="url" id="campaignUrl">
+        <label>Status</label>
+        <select id="campaignStatus">
+          <option value="active">Active</option>
+          <option value="ended">Ended</option>
+        </select>
+        <label>Upload Image</label>
+        <input type="file" id="campaignImageFile" accept="image/*">
+        <div class="preview-small">
+          <img id="campaignImagePreview" src="" alt="" style="display:none;">
+          <div id="campaignImagePlaceholder">No image</div>
+        </div>
+        <div style="margin-top:10px; display:flex; gap:10px;">
+          <button id="saveCampaignBtn" class="btn-primary" type="submit">Save</button>
+          <button id="resetCampaignForm" class="btn-outline" type="button">Reset</button>
+        </div>
+      </form>
+      <div id="adminCampaignList"></div>
+    </div>
+    <div id="admin-forms" class="admin-tab hidden">
+      <h3>Submitted Promotion Forms</h3>
+      <div id="adminFormsList"></div>
+    </div>
+  </section>
+
+  <!-- ================= PROFILE ================= -->
+  <section id="profileSection" class="hidden">
+    <div class="profile-wrapper">
+      
+      <!-- Profile header with banner -->
+      <div class="profile-header" id="profileHeader">
+        <div class="avatar small-avatar">
+          <img id="profileImagePreview" src="https://via.placeholder.com/80x80.png?text=U" alt="Profile Picture">
+        </div>
+        <h2 id="profileName">Username</h2>
+        <p id="profileEmail">user@example.com</p>
+      </div>
+
+      <!-- Upload controls OUTSIDE -->
+      <div class="profile-upload-controls">
+        <label for="profileImageInput" class="upload-btn">Upload Profile Picture</label>
+        <input type="file" id="profileImageInput" accept="image/*">
+
+        <label for="profileBannerInput" class="upload-btn">Upload Banner</label>
+        <input type="file" id="profileBannerInput" accept="image/*">
+      </div>
+
+      <div class="profile-body">
+        <div class="profile-main">
+          <div class="profile-card profile-details">
+            <h3>Account Info</h3>
+            <dl>
+              <dt>Name:</dt>
+              <dd><input type="text" id="editDisplayName" value=""/></dd>
+              <dt>Email:</dt>
+              <dd><span id="profileEmail"></span></dd>
+            </dl>
+            <button id="saveProfileBtn" class="action-btn">Save Name</button>
+          </div>
+          <div class="profile-card">
+            <h3>Change Password</h3>
+            <div class="password-row">
+              <input type="password" id="newPassword" placeholder="Enter new password">
+              <button id="changePasswordBtn" class="action-btn">Update</button>
+            </div>
+          </div>
+          <div id="profileChatBox" class="profile-card hidden">
+            <h3>Chat with Support</h3>
+            <div id="profileChatMessages"></div>
+            <div class="profile-chat-inputs">
+              <input type="text" id="profileChatInput" placeholder="Type a message...">
+              <button id="profileChatSend">Send</button>
+            </div>
+          </div>
+        </div>
+        <div class="profile-side">
+          <div class="profile-card">
+            <h3>Purchased Packages</h3>
+            <div id="profilePackages" class="packages-list empty-state">None yet</div>
+            <button id="profilePurchaseBtn" class="purchase-sim">+ Purchase Package</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PASSWORD MODAL ================= -->
+  <div id="pwModal" class="modal hidden">
+    <div class="modal-content">
+      <h3 id="pwModalTitle">Admin Login</h3>
+      <p>Enter admin password to proceed.</p>
+      <input id="pwInput" type="password" placeholder="Password">
+      <div class="modal-actions">
+        <button id="pwCancel" class="btn-outline">Cancel</button>
+        <button id="pwSubmit" class="btn-primary">Submit</button>
+      </div>
+      <p id="pwError" class="pw-error"></p>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <p>&copy; <span id="year"></span> NetMods. All rights reserved.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
